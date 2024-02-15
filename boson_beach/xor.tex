@@ -1,0 +1,27 @@
+\documentclass{standalone}
+\usepackage{circuitikz}
+
+\begin{document}
+\begin{circuitikz}
+    % Input bits
+    \foreach \i/\bit in {0/A, 1/B, 2/C, 3/D} {
+        \draw (-\i,0) node[anchor=east] {$\bit$} -- (-\i,0.5);
+    }
+
+    % XOR gates
+    \foreach \i in {0,1,2} {
+        \draw (-\i-0.5,0.5) node[xor port] (xor\i) {};
+        \draw (-\i-0.5,1) -- (xor\i.in 1);
+        \draw (-\i-0.5,0) -- (xor\i.in 2);
+        \draw (-\i,0.5) -- (xor\i.out);
+    }
+
+    % Final XOR gate and parity bit
+    \draw (-3,0.5) node[xor port] (finalxor) {};
+    \draw (-3,1) -- (finalxor.in 1);
+    \draw (-3,0) -- (finalxor.in 2);
+    \draw (finalxor.out) -- (-3.5,0.5) node[anchor=east] {$P$};
+    \draw (finalxor.out) -- (-3.5,0) node[anchor=east] {0};
+
+\end{circuitikz}
+\end{document}
