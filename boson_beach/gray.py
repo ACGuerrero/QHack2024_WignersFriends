@@ -13,10 +13,10 @@ def binary_to_grey(num_wires):
 
 
     # Put your solution here #
-    for i in range(num_wires-1):
-        qml.CNOT(wires=[i, i+1])
+    for i in range(num_wires-1,0,-1):
+        qml.CNOT(wires=[i-1, i])
     
 
-num_wires = 5
-drawer = qml.draw(binary_to_grey, show_all_wires=True, wire_order=[0,1])
+num_wires = 4
+drawer = qml.draw(binary_to_grey, show_all_wires=True)
 print(drawer(num_wires))
